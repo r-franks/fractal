@@ -50,7 +50,7 @@ def iterate_shape(center, vertices, iters, scaling=0.5, rotation=0):
         of shape get rotated relative to
         prev iteration
     
-    Yields
+    Returns
     -------
     all_coords: nx2 numpy array
         array of new points in shape generated
@@ -72,8 +72,6 @@ def iterate_shape(center, vertices, iters, scaling=0.5, rotation=0):
         # define an array to contain the next iteration of coordinates
         new_coords = np.ndarray(shape = (all_coords.shape[0]*n_vertices, 2))
         
-        # create counter to record where in the new_coords array to input coords
-        counter = 0
         # rescale the vertices
         vertices = vertices * scaling
         # rotate the vertices if necessary
@@ -81,13 +79,16 @@ def iterate_shape(center, vertices, iters, scaling=0.5, rotation=0):
             vertices = np.array( [cos*vertices[:,0] - sin*vertices[:,1],
                                   sin*vertices[:,0] + cos*vertices[:,1]] ).T
             
+        # create counter to record where in the new_coords array to input coords
+        counter = 0
+        
         # for every coordinate in all_coords, 
         # record coords of a shape with vertices centered at that coordinate
         for coord in all_coords:
-            for vertex in vertices:
-                new_coords[counter] = coord + vertex
-                counter += 1
+            new_coords[counter:(counter+n_vertices)] = coord + vertices
+            counter += n_vertices
         
         # update all_coords with new_coords
         all_coords = new_coords
-        yield all_coords
+    return all_coords
+        
