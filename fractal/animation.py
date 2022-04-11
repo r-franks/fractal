@@ -2,23 +2,41 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 import numpy as np
 
-def animate(vals_list, file, fps=60, windowsize=None, figsize=None, plot_kwargs={}):    
-    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=figsize)    
+def animate(vals_list, file, fps=60, windowsize=None, figsize=None, keep_axis=True, plot_kwargs={}):    
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=figsize)
+    
+    all_arrays = np.any([isinstance(vals, np.ndarray)==False for vals in vals_list]) == False
+    all_lists = np.any([isinstance(vals, list)==False for vals in vals_list]) == False
+    
     if windowsize:
         xmin, xmax = windowsize[0][0], windowsize[0][1]
         ymin, ymax = windowsize[1][0], windowsize[1][1]
     else:
-        vals_concat = 1.1*np.concatenate(vals_list)
-        xmin, xmax = vals_concat[:,0].min(), vals_concat[:,0].max()
-        ymin, ymax = vals_concat[:,1].min(), vals_concat[:,1].max()
+        if all_arrays:
+            vals_concat = 1.1*np.concatenate(vals_list)
+            xmin, xmax = vals_concat[:,0].min(), vals_concat[:,0].max()
+            ymin, ymax = vals_concat[:,1].min(), vals_concat[:,1].max()
+        elif all_lists:
+            vals_concat = 1.1*np.concatenate([np.concatenate(vals) for vals in vals_list])
+            xmin, xmax = vals_concat[:,0].min(), vals_concat[:,0].max()
+            ymin, ymax = vals_concat[:,1].min(), vals_concat[:,1].max()
+        else:
+            raise Exception("vals_list must be a list of 2d arrays or a list of lists of 2d arrays")
 
     def plot_frame(t):
         ax.clear()
         
+        if not keep_axis:
+            ax.axis('off')
+        
         ax.set_xlim([xmin, xmax])
         ax.set_ylim([ymin, ymax])
 
-        ax.plot(vals_list[t][:,0], vals_list[t][:,1], **plot_kwargs)
+        if isinstance(vals_list[t], list):
+            for vals in vals_list[t]:
+                ax.plot(vals[:,0], vals[:,1], **plot_kwargs)
+        else:
+            ax.plot(vals_list[t][:,0], vals_list[t][:,1], **plot_kwargs)
         
     anim = animation.FuncAnimation(fig, plot_frame, len(vals_list))
     
