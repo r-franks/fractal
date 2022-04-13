@@ -14,6 +14,11 @@ The descriptions of the parameters for each of these functions can be found by f
  </p>
  
 ## Maps and Transformations
-TBD
+At the moment, the only implemented map/transformations are derived from a process that "folds" a triangular object into a circular one by breaking it into horizontal strips and bending those strips into concentric circles (like the reverse of this <a href="https://www.youtube.com/watch?v=whYqhpc6S6g">visual proof</a>. This is done by the <a href="https://github.com/r-franks/fractal/blob/main/fractal/triangle_folding.py#L139">unfold_iso_triangle</a> function in <code>triangle_folding</code>. This function also a level of post-processing flexibility: If one specifies the <code>custom_map</code> parameter as a function that takes polar coordinates (r, θ) to new coordinates (r', θ'), then this transformation will be applied to the circle resulting to the folding process before it is returned. For more details, the descriptions of the parameters of this function can be found by following its link.
 
+Below is an example of what <code>unfold_iso_triangle</code> can do:
+<p align="center">
+  <img src="https://github.com/r-franks/fractal/blob/main/demo_images2.png" width=100%>
+ </p>
  
+ ## Animation/Gifs
