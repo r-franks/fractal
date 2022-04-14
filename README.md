@@ -18,7 +18,15 @@ At the moment, the only implemented map/transformations are derived from a proce
 
 Below is an example of what <code>unfold_iso_triangle</code> can do (from left to right: the original Sierpinski Triangle, the impact the transformation has on it, and the impact the transformation with a <code>custom_map</code> has on it).
 <p align="center">
-  <img src="https://github.com/r-franks/fractal/blob/main/demo_images2.png" width=100%>
+  <img src="https://github.com/r-franks/fractal/blob/main/demo_images2.png" width=75%>
  </p>
  
  ## Animation/Gifs
+One way to explore the impacts of different <code>custom_map</code>s is through animating a fractal as the <code>custom_map</code> applied to it gradually changes. This can be done with the <a href="https://github.com/r-franks/fractal/blob/main/fractal/animation.py#L5">animate</a> function in <code>animation</code> which works for general purpose simple animated plots. This function has some flexible behavior:
+* Provide a list of 2d numpy arrays to the <code>vals_list</code> parameter and <code>animate</code> will produce a gif of each numpy array plotted in sequence
+* Provide a list of <em>lists</em> of 2d numpy arrays to <code>vals_list</code> and <code>animate</code> will plot every 2d numpy array sharing a list in the same frame, for each list in the list of lists
+
+For details on parameters, see the link early in this section. An example gif produced using this <code>animate</code> function is below
+<p align="center">
+  <img src="https://github.com/r-franks/fractal/blob/main/demo_animation.gif" height=50% width=50%>
+</p>
