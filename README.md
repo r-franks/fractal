@@ -12,6 +12,7 @@ The descriptions of the parameters for each of these functions can be found by f
 <p align="center">
   <img src="https://github.com/r-franks/fractal/blob/main/demo_images1.png" height=50% width=50%>
  </p>
+For more examples of usage, see the <a href="https://github.com/r-franks/fractal/blob/main/demo_plots.ipynb">plot demo</a> (base fractals correspond to the left images).
  
 ## Maps and Transformations
 At the moment, the only implemented map/transformations are derived from a process that "folds" a triangular object into a circular one by breaking it into horizontal strips and bending those strips into concentric circles (like the reverse of this <a href="https://www.youtube.com/watch?v=whYqhpc6S6g">visual proof</a>. This is done by the <a href="https://github.com/r-franks/fractal/blob/main/fractal/triangle_folding.py#L139">unfold_iso_triangle</a> function in <code>triangle_folding</code>. This function also a level of post-processing flexibility: If one specifies the <code>custom_map</code> parameter as a function that takes polar coordinates (r, θ) to new coordinates (r', θ'), then this transformation will be applied to the circle resulting to the folding process before it is returned. For more details, the descriptions of the parameters of this function can be found by following its link.
@@ -20,13 +21,14 @@ Below is an example of what <code>unfold_iso_triangle</code> can do (from left t
 <p align="center">
   <img src="https://github.com/r-franks/fractal/blob/main/demo_images2.png" width=75%>
  </p>
+ For more examples of usage, see the <a href="https://github.com/r-franks/fractal/blob/main/demo_plots.ipynb">plot demo</a> (transformed fractals correspond to the right image).
  
  ## Animation/Gifs
 One way to explore the impacts of different <code>custom_map</code>s is through animating a fractal as the <code>custom_map</code> applied to it gradually changes. This can be done with the <a href="https://github.com/r-franks/fractal/blob/main/fractal/animation.py#L5">animate</a> function in <code>animation</code> which works for general purpose simple animated plots. This function has some flexible behavior:
 * Provide a list of 2d numpy arrays to the <code>vals_list</code> parameter and <code>animate</code> will produce a gif of each numpy array plotted in sequence
 * Provide a list of <em>lists</em> of 2d numpy arrays to <code>vals_list</code> and <code>animate</code> will plot every 2d numpy array sharing a list in the same frame, for each list in the list of lists
 
-For details on parameters, see the link early in this section. An example gif produced using this <code>animate</code> function is below:
+For details on parameters, see the link earlier in this section. For examples of usage, see the <a href="https://github.com/r-franks/fractal/blob/main/demo_animation.ipynb">animation demo</a> which shows how many different fractals may be animated using the <code>animate</code> function. An example gif produced using this <code>animate</code> function is below:
 <p align="center">
   <img src="https://github.com/r-franks/fractal/blob/main/demo_animation.gif" height=50% width=50%>
 </p>
