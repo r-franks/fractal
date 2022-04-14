@@ -3,6 +3,37 @@ from matplotlib import animation
 import numpy as np
 
 def animate(vals_list, file, fps=60, windowsize=None, figsize=None, keep_axis=True, plot_kwargs={}):    
+    """Creates an animation by plotting the
+    2d coordinate arrays in vals_list
+    sequentially
+    
+    Parameters
+    ----------
+    vals_list: list of 2x? numpy arrays or list of
+    lists of 2x?
+        List of coordinates to be plotted for each
+        frame
+    file: str
+        where to save the animation
+    fps: int
+        fps of gif
+    windowsize: list of 2 lists of length 2
+        The range of the plotted
+        window's x and y domains:
+        [[xmin, xmin], [ymin, ymax]]
+    figsize: list of two ints
+        size of figure
+    keep_axis: bool
+        whether to retain axes
+    plot_kwargs: dict
+        dictionary of plotting specific
+        parameters
+ 
+    Returns
+    -------
+    None (saves an animated gif)
+    """
+
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=figsize)
     
     all_arrays = np.any([isinstance(vals, np.ndarray)==False for vals in vals_list]) == False
