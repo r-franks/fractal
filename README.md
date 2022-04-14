@@ -26,7 +26,7 @@ One way to explore the impacts of different <code>custom_map</code>s is through 
 * Provide a list of 2d numpy arrays to the <code>vals_list</code> parameter and <code>animate</code> will produce a gif of each numpy array plotted in sequence
 * Provide a list of <em>lists</em> of 2d numpy arrays to <code>vals_list</code> and <code>animate</code> will plot every 2d numpy array sharing a list in the same frame, for each list in the list of lists
 
-For details on parameters, see the link early in this section. An example gif produced using this <code>animate</code> function is below
+For details on parameters, see the link early in this section. An example gif produced using this <code>animate</code> function is below:
 <p align="center">
   <img src="https://github.com/r-franks/fractal/blob/main/demo_animation.gif" height=50% width=50%>
 </p>
